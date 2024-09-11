@@ -89,8 +89,26 @@ Example of Traceroute Parameters
 
 ```
 traceroute_params:
-  - [8.8.8.8, 4, UDP, false, 3, 48, 1, 32, 16, true]
-  - [1.1.1.1, 4, ICMP, false, 3, 64, 1, 30, 8, false]
+          - target: 8.8.8.8
+            af: 4
+            protocol: UDP
+            resolve_on_probe: false
+            packets: 3
+            size: 48
+            first_hop: 1
+            max_hops: 32
+            paris: 16
+            dont_fragment: true
+          - target: 1.1.1.1
+            af: 4
+            protocol: ICMP
+            resolve_on_probe: false
+            packets: 3
+            size: 64
+            first_hop: 1
+            max_hops: 30
+            paris: 8
+            dont_fragment: false
 ```
 How to Run
 
