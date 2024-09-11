@@ -20,10 +20,9 @@ The **Cloud Probe** is designed to run internet measurements such as traceroute 
 Clone the repository and install the required dependencies:
 
 ```bash
-git clone https://github.com/your-repo/cloud-measurement-tool.git
-cd cloud-measurement-tool
-pip install -r requirements.txt
-Configuration
+git clone https://github.com/kedar-thiagarajan/CloudProbe.git
+cd CloudProbe
+pip install .
 ```
 
 The tool uses a YAML configuration file to specify cloud provider credentials, VM configurations, and measurement parameters. You can specify multiple sets of measurements.
@@ -129,7 +128,7 @@ Collect and save the measurement results.
 
 ```bash
 
-python deploy.py aws_experiment.yaml /home/user/.ssh/id_rsa.pub
+cloudprobe -c aws_experiment.yaml -s /home/user/.ssh/id_rsa.pub
 This command runs the traceroute measurements defined in the aws_experiment.yaml configuration file, using the specified SSH key to access the AWS instance.
 ```
 
