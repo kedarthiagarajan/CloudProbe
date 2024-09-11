@@ -1,7 +1,7 @@
 import os
 import shutil
+from cloudprobe.src.utils import TERRAFORM_TEMPLATE_DIR
 
-TERRAFORM_TEMPLATE_DIR = "./terraform_templates"
 TERRAFORM_TEMPLATE_DIR_AWS = os.path.join(TERRAFORM_TEMPLATE_DIR, 'aws_vm')
 TERRAFORM_WORKSPACE_DIR = './terraform_workspaces/'
 SCRIPT_DIR = os.path.join(TERRAFORM_TEMPLATE_DIR, "scripts")

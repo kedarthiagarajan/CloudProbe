@@ -1,0 +1,2 @@
+[console_scripts]
+cloudprobe = cloudprobe.deploy:main

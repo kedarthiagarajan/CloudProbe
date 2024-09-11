@@ -111,7 +111,6 @@ resource "aws_security_group" "allow_ssh" {
 
   lifecycle {
     create_before_destroy = true
-    prevent_destroy = true
   }
 }
 
@@ -123,7 +122,6 @@ resource "aws_key_pair" "vm_key" {
 
   lifecycle {
     create_before_destroy = true
-    prevent_destroy = true
   }
 }
 

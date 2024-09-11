@@ -19,6 +19,7 @@ class SSHMeasurementRunner:
 
             # Run the command
             stdin, stdout, stderr = ssh.exec_command(command)
+            print(stdout)
             
             # Wait for the command to finish and retrieve the output
             stdout.channel.recv_exit_status()  # Wait for the command to finish
@@ -38,11 +39,11 @@ class SSHMeasurementRunner:
         if measurement_type == "traceroute":
             # Construct the traceroute command with the parameters
             cmd = "scamper -c \"trace -w {0} -P {1} -f {2} -m {3}\" -i {4}".format(
-                int(params.get("response_timeout", 10000) // 1000,  # Convert ms to seconds
+                int(params.get("response_timeout", 10000)) // 1000,  # Convert ms to seconds
                 params["protocol"],
                 params["first_hop"],
                 params["max_hops"],
-                params["target"], af=params["af"]))
+                params["target"], af=params["af"])
         
         else:
             raise Exception(f"Unsupported measurement type: {measurement_type}")

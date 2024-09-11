@@ -1,8 +1,9 @@
 import subprocess
 import json
 import os
-from .SSHMeasurementRunner import SSHMeasurementRunner
+from cloudprobe.src.SSHMeasurementRunner import SSHMeasurementRunner
 
+TERRAFORM_TEMPLATE_DIR = "./terraform_templates"
 def get_public_ip(terraform_dir):
     try:
         # Run terraform output command and parse JSON output
@@ -65,7 +66,7 @@ def run_measurement(public_ip, ssh_user, ssh_key_path, measurement_type, params,
 
     # Run the measurement command on the remote server
     print(f"Running {measurement_type} on {public_ip}...")
-    result = runner.run_measurement(params)
+    result = runner.run_measurement(measurement_type, params)
 
     # Save the output to the specified path
     try:

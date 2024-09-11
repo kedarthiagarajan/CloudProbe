@@ -2,11 +2,10 @@ import os
 import subprocess
 import yaml
 import sys
+import argparse 
+from cloudprobe.src import aws
+from cloudprobe.src.utils import * 
 
-from src import aws
-from src.utils import * 
-
-TERRAFORM_DIR = './tmp/'
 SCRIPT_DIR = './terraform_templates/scripts'
 OUTPUT_DIR = './output/'
 
@@ -15,9 +14,19 @@ def load_config(config_file):
         return yaml.safe_load(file)
 
 
-def main(config_file, ssh_key_path):
-    config = load_config(config_file)
+def main(config_file=None, ssh_key_path=None):
+    if config_file is None or ssh_key_path is None:
+        # If no arguments provided, use argparse to get them
+        parser = argparse.ArgumentParser(description="Run cloud deployment and teardown operations.")
+        parser.add_argument("-c", "--config", type=str, required=True, help="Path to the configuration YAML file.")
+        parser.add_argument("-s", "--ssh-key-path", type=str, default="~/.ssh/id_rsa.pub", help="Path to desired SSH public key")
 
+        args = parser.parse_args()
+        config_file = args.config
+        ssh_key_path = args.ssh_key_path
+
+    config = load_config(config_file)
+     
     for provider in config['cloud_providers']:
         if provider['name'] == 'AWS':
             aws.setup_aws_credentials(provider['credentials'])
